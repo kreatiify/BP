@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Places Near Barpeta Road</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /*
+        * Advanced CSS Styles for the Animated Vintage Book Page
+        */
+
+        /* --- Global Styles & Animated Background --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            color: #4a4a4a;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiGAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAhpAAAIaQGMOe6aAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAADdQTFRF////u7uasbGoqaCgoJ+dn56dmpqZmZubnJqan5manpqZnpuZmZiYnZ6bnZ2cnp6bnZ2cnZ2cO5mCVAAAAhJJREFUSInt1duO4yAQBVCfTAAoFv//Z0fSIBCxU4mqt73NnqtbT2oKCwoKChLo4hSgCH05RylCMbpxi9GMSZyjBOX4xSXGMWZxjJOEoxSnGPf4zCdScIpTHOOYwTlnGMc5zlNKcpJTjBOc4zQlOcEpJgkhSkklOUlJySkkhUkpCUkpwSnJSCEpISkJIclJyUlKcEpykhKT4FJTgpBAEpCSkFKckpyUhCUlKcEpISghKUghCUoIQkpCClISkJAQhKUFIISkBKUEpCUEJyQkpyQlBScEpzklKEE5SSnKSUoxjHKec4zzjGMlJTnGKk5zgJKc5xSlOcYITnOMUpzhBKU5whlOc4hSnuME53uEEdzjCKT5xim2c4xSjOEE5ylGMUpxjHOf4xTmKcZTgGKc5xSmOUZziHGeYxxkuccppnOME5zhJKcpITnGKk5xiFKc4xSkmSkpKclISkpCUhJSkhKSkBCWEpCSEYKSkEKSEpISkBCUhKSkIKQkpSUhCCkpKQlJKSEpyUklOcEpyklNMcpJznOAU5zgny8hRzso4yXkucoZTHOMUp9nFKb5yigmcowQnuMY1bnKNK8xgBieY4QxnOMsFTnCGMzxhh1Mc4RSXuMEJrjCBCVxihhOY5xRXOIMZLnGMEzzlFde4xhWuYIANXOEKV7jGDq4wg+vfwDXucIcXvOENb/gHGOA+DvCPQ4AIBCG4QQiuMIILTnCDC+bwghk8YAQPsMAVLnCDC3whCN8IwgdC8IMQPKCEJ9zghKNYzRnu8Yb//AMpPBYGqGvFmgAAAABJRU5ErkJggg==');
+            background-color: #c9bca9;
+            background-repeat: repeat;
+            overflow-x: hidden; /* Prevent horizontal scrollbars */
+        }
+
+        /* --- Rain Effect Canvas --- */
+        #rain-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Sits above the body background but below content */
+            pointer-events: none; /* Allows clicks to go through to content below */
+            background: linear-gradient(to bottom, rgba(74, 61, 51, 0.1), rgba(46, 36, 29, 0.4));
+        }
+
+        /* --- Preloader Animation --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fdf5e6;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(93, 64, 55, 0.2);
+            border-top-color: #5d4037;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- Main Content Wrapper --- */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 4rem 1rem;
+            min-height: 100vh;
+        }
+
+        /* --- The Main Book Page Container --- */
+        .book-page-container {
+            width: 100%;
+            max-width: 1100px; /* Increased max-width for better grid display */
+            padding: 3rem 2.5rem;
+            background: rgba(253, 245, 230, 0.96);
+            border: 1px solid rgba(119, 107, 93, 0.4);
+            border-radius: 5px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: slideUpIn 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        
+        @keyframes slideUpIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- On-Scroll Reveal Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Home Button --- */
+        #home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(253, 245, 230, 0.9);
+            border: 1px solid rgba(119, 107, 93, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        #home-button:hover {
+            transform: scale(1.1);
+            background-color: #fff;
+        }
+        
+        #home-button svg {
+            width: 24px;
+            height: 24px;
+            fill: #5d4037;
+            transition: fill 0.3s ease;
+        }
+
+        #home-button:hover svg {
+            fill: #3e2723;
+        }
+        
+        /* --- Header and Title --- */
+        .page-header {
+            text-align: center;
+            border-bottom: 2px solid rgba(119, 107, 93, 0.25);
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #5d4037;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+        }
+        
+        .page-subtitle {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #776b5d;
+            margin-top: 0.5rem;
+        }
+
+        /* --- Grid for the Image Cards --- */
+        .places-grid {
+            display: grid;
+            /* Creates responsive columns: 3 on large screens, 2 on medium, 1 on small */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem; /* Increased gap for better spacing */
+        }
+
+        /* --- Individual Place Card (Button) --- */
+        .place-card {
+            display: block;
+            text-decoration: none;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden; /* Ensures the image zoom doesn't go outside the card borders */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-color: #5d4037; /* Fallback color */
+        }
+
+        .place-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .place-card:active {
+            transform: translateY(-2px) scale(0.99); /* Click effect */
+        }
+
+        /* Card Image styles */
+        .place-card .place-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers the card area without distortion */
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .place-card:hover .place-image {
+            transform: scale(1.15); /* Zoom effect on image */
+        }
+        
+        /* Glossy overlay effect */
+        .place-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 40%);
+            transition: opacity 0.4s ease;
+        }
+        
+        .place-card:hover::after {
+           opacity: 0.5;
+        }
+
+        /* Text overlay container */
+        .place-card .place-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2.5rem 1.5rem 1.5rem; /* Padding gives space for the gradient */
+            color: #ffffff;
+            /* Gradient for text readability */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+            z-index: 5;
+        }
+
+        /* Place Name Text */
+        .place-card .place-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            transform: translateY(100%); /* Start with the text hidden below */
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.5s ease;
+        }
+
+        .place-card:hover .place-name {
+            transform: translateY(0); /* Animate text into view on hover */
+            opacity: 1;
+        }
+        
+        /* Staggered animation delays for the cards */
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.1s; } 
+        .reveal:nth-child(5) { transition-delay: 0.2s; }
+        .reveal:nth-child(6) { transition-delay: 0.3s; }
+        .reveal:nth-child(7) { transition-delay: 0.1s; }
+        .reveal:nth-child(8) { transition-delay: 0.2s; }
+        .reveal:nth-child(9) { transition-delay: 0.3s; }
+        .reveal:nth-child(10){ transition-delay: 0.1s; }
+
+
+        /* --- Responsive Design Adjustments --- */
+        @media (max-width: 768px) {
+            .content-wrapper { padding: 3rem 1rem; }
+            .book-page-container { padding: 2rem 1.5rem; max-width: 100%; }
+            .page-title { font-size: 2.2rem; }
+            #home-button { top: 15px; left: 15px; width: 45px; height: 45px; }
+            #home-button svg { width: 20px; height: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .content-wrapper { padding: 2rem 0.5rem; }
+            .book-page-container { padding: 1.5rem 1rem; }
+            .page-title { font-size: 1.8rem; }
+            .places-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .place-card .place-name { font-size: 1.4rem; } 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Rain Effect Background -->
+    <canvas id="rain-canvas"></canvas>
+    
+    <!-- Home Button -->
+    <a href="../index.html" id="home-button" title="Go to Homepage">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    
+    <div class="content-wrapper">
+        <div class="book-page-container">
+            <header class="page-header reveal">
+                <h1 class="page-title">Tourist Places Near Barpeta Road</h1>
+                <p class="page-subtitle">Discover the cultural and natural heritage of Assam</p>
+            </header>
+            
+            <main>
+                <div class="places-grid">
+
+                    <!-- EXAMPLE 1: Linking to a local file named 'manas-national-park.html' -->
+                    <a href="https://manasnptr.in/" class="place-card reveal">
+                        <img src="https://cdn.pixabay.com/photo/2021/03/03/14/55/rhino-6065480_1280.jpg" alt="Manas National Park" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Manas National Park</h3>
+                        </div>
+                    </a>
+
+                    <!-- EXAMPLE 2: Linking to a full external website URL -->
+                    <a href="https://barpetasatra.org/" class="place-card reveal" target="_blank">
+                        <img src="https://cdn.tripuntold.com/media/photos/location/2018/11/28/f4d8127e-dabb-41ba-97e0-b3fad423d8fc.jpg" alt="Barpeta Satra" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Barpeta Satra</h3>
+                        </div>
+                    </a>
+
+                    <!-- EXAMPLE 3: Using a '#' for links you haven't created yet -->
+                    <a href="#" class="place-card reveal">
+                        <img src="https://www.tourmyindia.com/states/assam/images/patbaushi-satra1.jpg" alt="Patbausi Satra" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Patbausi Satra</h3>
+                        </div>
+                    </a>
+
+                    <!-- Replace the href="#" below with your links -->
+                    <a href="https://barpeta.assam.gov.in/tourist-place-detail/272" class="place-card reveal">
+                        <img src="https://photos.wikimapia.org/p/00/03/38/95/32_big.jpg" alt="Garakhiya Goshai Than" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Garakhiya Goshai Than</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="place-card reveal">
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/76/63/07/satra-main-gate-ganakkuchi.jpg?w=1200&h=-1&s=1" alt="Guagacha Satra" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Guagacha Satra</h3>
+                        </div>
+                    </a>
+
+                    <a href="#" class="place-card reveal">
+                        <img src="https://placehold.co/400x500/4E342E/FFFFFF?text=Rajdhakmal" alt="Rajdhakmal" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Rajdhakmal</h3>
+                        </div>
+                    </a>
+
+                    <a href="https://as.wikipedia.org/wiki/%E0%A6%B8%E0%A7%81%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%B0%E0%A7%80%E0%A6%A6%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE_%E0%A6%B8%E0%A6%A4%E0%A7%8D%E0%A7%B0" class="place-card reveal">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/%E0%A6%97%E0%A6%9C_%E0%A6%A6%E0%A7%81%E0%A7%B1%E0%A6%BE%E0%A7%B0_%E0%A6%AC%E0%A6%BE_%E0%A6%A6%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%A8.jpg" alt="Sundaridia Satra" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Sundaridia Satra</h3>
+                        </div>
+                    </a>
+
+                    <a href="https://mindtrip.ai/attraction/barpeta-assam/ganakkuchi-satra/at-cen6l8xv" class="place-card reveal">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Ganakkuchi_satra_at_sunset.jpg/1200px-Ganakkuchi_satra_at_sunset.jpg" alt="Ganakkuchi Satra" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Ganakkuchi Satra</h3>
+                        </div>
+                    </a>
+                    
+                     <a href="https://howlytown.in/hi/Kaljhar-Satra" class="place-card reveal">
+                        <img src="https://placehold.co/400x500/8D6E63/FFFFFF?text=Kalijhar+Satra" alt="Kalijhar Satra" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Kaljhar Satra</h3>
+                        </div>
+                    </a>
+
+                     <a href="https://en.wikipedia.org/wiki/Moinbari_Satra" class="place-card reveal">
+                        <img src="https://pbs.twimg.com/media/GHPO1c9W0AA_Any.jpg" alt="Moinbari Satra" class="place-image">
+                        <div class="place-info">
+                            <h3 class="place-name">Moinbari Satra</h3>
+                        </div>
+                    </a>
+                    
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Preloader Logic ---
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', function() {
+                preloader.classList.add('hidden');
+            });
+
+            // --- Rain Effect Logic ---
+            const canvas = document.getElementById('rain-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            let raindrops = [];
+            const numberOfDrops = 250; 
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class RainDrop {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * -canvas.height;
+                    this.length = Math.random() * 20 + 10;
+                    this.speed = Math.random() * 4 + 2;
+                    this.opacity = Math.random() * 0.5 + 0.3;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(this.x, this.y + this.length);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+                }
+
+                update() {
+                    this.y += this.speed;
+                    if (this.y > canvas.height) {
+                        this.reset();
+                    }
+                }
+            }
+
+            function createRain() {
+                for (let i = 0; i < numberOfDrops; i++) {
+                    raindrops.push(new RainDrop());
+                }
+            }
+
+            function animateRain() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                raindrops.forEach(drop => {
+                    drop.update();
+                    drop.draw();
+                });
+                requestAnimationFrame(animateRain);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            
+            resizeCanvas();
+            createRain();
+            animateRain();
+
+            // --- On-Scroll Reveal Logic ---
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+
+        });
+    </script>
+</body>
+</html>

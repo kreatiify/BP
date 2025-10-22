@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribute to a Great Mind</title>
+    
+    <!-- Google Fonts for elegant typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for the back button icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <style>
+        /* ================================== */
+        /*         1. GLOBAL STYLES         */
+        /* ================================== */
+        
+        /* Using CSS variables for easy theme customization */
+        :root {
+            --bg-color: #0d0d1a;
+            --card-bg-color: rgba(20, 20, 40, 0.7);
+            --primary-color: #00bfff; /* Deep Sky Blue - a vibrant accent */
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden; /* Prevents horizontal scroll */
+        }
+
+        /* ================================== */
+        /*       2. BACKGROUND & LAYOUT     */
+        /* ================================== */
+        
+        /* The container for the moving particles background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Place it behind all other content */
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        /* ================================== */
+        /*        3. BACK BUTTON            */
+        /* ================================== */
+
+        .back-button {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 300;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-button:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        /* ================================== */
+        /*        4. PROFILE CARD           */
+        /* ================================== */
+
+        .profile-card {
+            background: var(--card-bg-color);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            
+            /* Glassmorphism Effect */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 25px;
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.5);
+            animation: fadeInScaleUp 1s ease-out;
+        }
+
+        .person-name {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .person-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 300;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            margin-bottom: 30px;
+            border: none;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            text-align: left; /* Changed for better readability of long text */
+            max-width: 100%;
+        }
+        
+        .description p {
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        /* ================================== */
+        /*      5. ANIMATIONS & EFFECTS     */
+        /* ================================== */
+
+        /* Animation for the main image */
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Staggered animation for content elements */
+        .animated-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        /* This class will be added by JavaScript when element is in view */
+        .in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animated-item:nth-child(1) { transition-delay: 0.2s; }
+        .animated-item:nth-child(2) { transition-delay: 0.4s; }
+        .animated-item:nth-child(3) { transition-delay: 0.6s; }
+        .animated-item:nth-child(4) { transition-delay: 0.8s; }
+        .animated-item:nth-child(5) { transition-delay: 1.0s; }
+
+
+        /* ================================== */
+        /*        6. RESPONSIVENESS         */
+        /* ================================== */
+        
+        @media (max-width: 768px) {
+            .profile-card {
+                padding: 30px 20px;
+            }
+
+            .person-name {
+                font-size: 2.5rem;
+            }
+
+            .person-title {
+                font-size: 1rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This div is the canvas for the moving particles background -->
+    <div id="particles-js"></div>
+
+    <!-- The beautiful back button -->
+    <a href="../index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        <span>Home</span>
+    </a>
+
+    <!-- Main content container -->
+    <main class="content-wrapper">
+        <section class="profile-card">
+            
+            <!-- EDIT HERE: Change the image source ('src') to the photo of the person. -->
+            <img src="../great people img/8.jpeg" alt="Portrait of a Great Person" class="profile-image">
+            
+            <!-- These are the items that will animate into view -->
+            
+            <!-- EDIT HERE: Replace with the person's name -->
+            <h1 class="person-name animated-item">[GREAT PERSON'S NAME]</h1>
+
+            <!-- EDIT HERE: Replace with a short title or descriptor -->
+            <p class="person-title animated-item">Visionary, Scientist, Artist</p>
+
+            <hr class="divider animated-item">
+
+            <div class="description">
+                <!-- EDIT HERE: Replace these paragraphs with the "big info" about the person. Add or remove <p> tags as needed. -->
+                <p class="animated-item">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae purus nec odio auctor feugiat. Duis sit amet nisi et sem pulvinar tempor. Fusce facilisis, urna vel pharetra lacinia, elit nunc finibus felis, et dignissim leo turpis vel nulla. Vivamus quis dictum metus, at feugiat justo.
+                </p>
+                <p class="animated-item">
+                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Praesent vitae nisl et lorem pharetra interdum. Maecenas scelerisque, sapien non commodo aliquam, est ante lacinia nisl, id fermentum eros leo eu quam. Quisque vitae tincidunt nulla.
+                </p>
+                <p class="animated-item">
+                    In hac habitasse platea dictumst. Curabitur vel turpis id lectus consequat congue. Ut nec ante non ligula hendrerit consequat. Integer suscipit, enim vel interdum consectetur, nunc risus blandit mi, vitae consectetur nulla lectus ac leo. Vivamus eu lorem at nisl tristique gravida.
+                </p>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- JavaScript library for the moving particles background -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <script>
+        /* ================================== */
+        /*     1. PARTICLES.JS BACKGROUND     */
+        /* ================================== */
+
+        // This function initializes the moving particle background with a custom configuration.
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80, // Number of particles
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff" // Particle color
+                },
+                "shape": {
+                    "type": "circle",
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2, // Speed of particles
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab" // Particles grab to cursor on hover
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push" // Push particles on click
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_opacity": 1
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        /* ================================== */
+        /*      2. SCROLL ANIMATION           */
+        /* ================================== */
+
+        // This script adds a class 'in-view' to elements when they become visible
+        // in the viewport, triggering the CSS animation.
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.animated-item');
+
+            // Set up the Intersection Observer
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    // If the element is in view, add the 'in-view' class
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the item is visible
+            });
+
+            // Tell the observer to watch each of the animated items
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
+
+    </script>
+</body>
+</html>

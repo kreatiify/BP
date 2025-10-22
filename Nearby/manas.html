@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Location</title>
+    <style>
+        :root {
+            --primary-color: #FFFFFF;
+            --secondary-color: #1a1a1a;
+            --accent-color: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Garamond', 'Times New Roman', serif;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Placeholder for your background image */
+            background-image: url('https://cdn.pixabay.com/photo/2024/07/23/10/55/rhinoceros-8914950_1280.jpg'); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: var(--accent-color);
+            animation: slideInDown 1.5s ease-in-out;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: slideInUp 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Advanced Mouse Effect */
+        .cursor-dot, .cursor-outline {
+            pointer-events: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            z-index: 9999;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--accent-color);
+            z-index: 9998;
+        }
+        .cursor-dot.visible, .cursor-outline.visible {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div class="container">
+        <div class="content">
+            <h1>Manas National Park</h1>
+            <p style="text-align: justify;"> Manas National Park is a national park, Project Tiger reserve, and an elephant reserve in Assam, India. Located in the Himalayan foothills, it borders the Royal Manas National Park[2] in Bhutan. The park is known for its rare and endangered endemic wildlife such as the Assam roofed turtle, hispid hare, golden langur and pygmy hog. It also hosts the only known population of pygmy hogs in the world.[3] Manas is also famous for its population of the wild water buffalo.[4] Because of its exceptional biodiversity, scenery, and variety of habitats, Manas National Park is a biosphere reserve and a UNESCO World Heritage Site.[5]
+
+Origin of the name
+The name of the park is originated from the Manas River. The Manas river is a major tributary of Brahmaputra River, which passes through the heart of the national park.
+
+History
+
+Most of the Manas National Park was under the Kingdom of Bhutan till the Duar War of 1865
+The area today consisting of the Manas National Park was under the Kingdom of Bhutan till the Duar War of 1865 when it was ceded to British India.
+
+The Manas Wildlife Sanctuary was declared a sanctuary on 1 October 1928 with an area of 391 km2 (151 sq mi). Prior to the declaration of the sanctuary, the area had two reserve forests, called Manas Reserve Forest and North Kamrup Reserve Forest.[6] It was used by the Cooch Behar royal family and Raja of Gauripur as a hunting reserve.[citation needed] It was declared a World Heritage Site in 1985 by UNESCO.[7] Manas Biosphere Reserve was declared in 1989. Kahitama R.F., Kokilabari R.F., and Panbari R.F. were added in the year 1990 to form Manas National Park.[6] In 1992, UNESCO declared it as a world heritage site in danger[7] due to heavy poaching and terrorist activities.[citation needed] On 25 February 2008, the area was increased to 500 km2 (190 sq mi).[citation needed] On 21 June 2011, it was removed from the List of World Heritage in Danger and was commended for its efforts in preservation.[7]
+
+Human history
+There is only one forest village, Pagrang, in the core of the national park. Apart from this village 56 more villages surround the park. Many more fringe villages are directly or indirectly dependent on the park.
+
+Geography
+Political Geography: The park area falls in the following districts: Chirang, Baksa in the autonomous territorial region, i.e. BTR in the state of Assam in India.
+
+
+A view of mountains from the park
+The park is divided into three ranges. The western range is based at Panbari, the central at Bansbari near Barpeta Road, and the eastern at Bhuiyapara near Pathsala. The ranges are not well connected; while two major rivers need to be forded in going from the centre to the Panbari, there is a rough trail (the Daimari road) connecting the centre to the eastern range. Most visitors come to Bansbari and then spend some time inside the forest at Mathanguri on the Manas river at the Bhutan border.
+
+Physical Geography: Manas is located in the foothills of the Eastern Himalaya and is densely forested. The Manas river flows through the west of the park and is the main river within it. It is a major tributary of Brahmaputra river and splits into two separate rivers, the Bwrsi and Bholkaduba as it reaches the plains. Five other smaller rivers also flow through the national park which lies on a wide, low-lying alluvial terrace spreading out below the foothills of the outer Himalaya. The Manas river also serves as an international border dividing India and Bhutan. The bedrock of the savanna area in the north of the park is made up of limestone and sandstone, whereas the grasslands in the south of the park stand on deep deposits of fine alluvium. The combination of Sub-Himalayan Bhabar Terai formation along with the riverine succession continuing up to Sub-Himalayan mountain forest makes it one of the richest areas of biodiversity in the world. The park is 950 square kilometres (370 sq mi) in the area and is situated at an altitude of 61–110 metres (200–361 ft) above mean sea level.
+
+Climate: The minimum temperature is around 15 °C (59 °F) and the maximum temperature is around 37 °C (99 °F).
+
+Heavy rainfall occurs between May and September. The annual average rainfall is around 333 centimetres (131 in).
+
+Biomes
+
+Tephrodornis gularis
+There are two major biomes present in Manas:
+
+The grassland biomes : pygmy hog, Indian rhinoceros (re-introduced in 2007 after extinction due to heavy poaching during the Bodo uprising), bengal florican, wild Asian buffalo, etc.
+The forest biomes : slow loris, capped langur, wild pig, sambar, great hornbill, Malayan giant squirrel or black giant squirrel, Chinese pangolin etc.
+Flora
+
+Jungle owl in Manas
+Vegetation: The monsoon forests of Manas lie in the Brahmaputra Valley semi-evergreen forests ecoregion.[8] The combination of Sub-Himalayan Bhabar Terai region with riverine succession leading up to the Himalayan subtropical broadleaf forests makes it one of the richest biodiversity areas in the world.
+
+The main vegetation types are:
+
+Sub-Himalayan light alluvial semi-evergreen forests in the northern parts.
+East Himalayan mixed moist and dry deciduous forests.
+Low alluvial savanna woodland, and
+Assam Valley semi-evergreen alluvial grasslands which cover almost 50% of the park.
+Much of the riverine dry deciduous forest is at an early successional stage. It is replaced by moist deciduous forest away from water courses, which is succeeded by semi-evergreen climax forest in the northern part of the park. A total of 543 plants species have been recorded from the core zone. Of these, 374 species are dicotyledons (including 89 trees), 139 species monocotyledons and 30 are pteridophytes and gymnosperms.
+
+The park's common trees include Aphanamixis polystachya, Anthocephalus chinensis, Syzygium cumini, Syzygium formosum, Syzygium oblatum, Bauhinia purpurea, Mallotus philippensis, Cinnamomum tamala, Actinodaphne obvata, Bombax ceiba, Sterculia villosa, Dillenia indica, Dillenia pentagyna, Careya arborea, Lagerstroemia parviflora, Lagerstroemia speciosa, Terminalia bellirica, Terminalia chebula, Mallotus polycarpa,[9] Gmelina arborea, Oroxylum indicum and Bridelia spp. The grasslands are dominated by Imperata cylindrica, Saccharum naranga, Phragmites karka, Arundo donax, Dillenia pentagyna, Phyllanthus emblica, Bombax ceiba, and species of Clerodendrum, Leea, Grewia, Premna and Mussaenda.
+
+Fauna
+
+A capped langur in Manas
+The sanctuary has recorded 55 species of mammals, 380 species of birds, 50 of reptiles, and 3 species of amphibians. Out of these wildlife, 21 mammals are India's Schedule I mammals and 31 of them are threatened.
+
+The fauna of the sanctuary include Indian elephants, Indian rhinoceros, gaurs, wild water buffaloes, barasingha, Bengal tigers, Indian leopards, clouded leopards, Asian golden cats, jungle cat, leopard cat, fishing cat, marbled cat, dholes, golden jackal, capped langurs, golden langurs, Assamese macaques, rhesus macaque, gray langur, slow loris, hoolock gibbons, smooth-coated otters, sloth bears, barking deer, hog deer, sambar deer and chitals and large Indian civet, common palm civet, spotted linsang, yellow-throated marten, black giant squirrel, Indian porcupine, Indian pangolin, Chinese pangolin, wild boar.
+
+The park is well known for species of rare and endangered wildlife that are not found anywhere else in the world such as the Assam roofed turtle, hispid hare, golden langur and pygmy hog. The Durrell Wildlife Conservation Trust has been involved in released pygmy hogs into the wild. In 2024, 9 pygmy hogs were released into the wild in the park increasing its population in Manas to 63.[10]
+
+The Manas hosts more than 450 species of birds.[11] It has the largest population of the endangered Bengal florican to be found anywhere. Other major bird species include great hornbills, junglefowls, bulbuls, ruddy shelducks, kalij pheasants, egrets, pelicans, lesser fish eagles, crested serpent-eagles, falcons, scarlet minivets, bee-eaters, magpie-robins, pied hornbills, grey hornbills, mergansers, harriers, Indian peafowl, ospreys and herons.
+               
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth Scrolling for anchor links (if you add any)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mouse Follower Effect
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+            
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, {duration: 500, fill: "forwards"});
+
+        });
+
+        document.body.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('visible');
+            cursorOutline.classList.add('visible');
+        });
+
+        document.body.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('visible');
+            cursorOutline.classList.remove('visible');
+        });
+
+    </script>
+</body>
+</html>

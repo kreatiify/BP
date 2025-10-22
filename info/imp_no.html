@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barpeta Road Important Contact Numbers</title>
+    <style>
+        /* CSS Variables for a refined dark theme */
+        :root {
+            --bg-color-solid: #0d1117;
+            --primary-surface-color: #161b22;
+            --secondary-surface-color: rgba(36, 41, 47, 0.5);
+            --border-color: #30363d;
+            --accent-glow-color: rgba(88, 166, 255, 0.5);
+            --accent-color: #58a6ff;
+            --primary-text-color: #c9d1d9;
+            --secondary-text-color: #8b949e;
+            --header-glow: 0 0 8px rgba(88, 166, 255, 0.25);
+            --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            --card-hover-border: #58a6ff;
+        }
+
+        /* Basic Reset & Font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--primary-text-color);
+            line-height: 1.6;
+            
+            /* --- CENTERING THE ENTIRE PAGE --- */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+
+            /* --- BACKGROUND IMAGE INSTRUCTIONS --- */
+            /* 1. Uncomment the 'background' property below. */
+            /* 2. Replace 'path/to/your-dark-image.jpg' with the actual path to your image. */
+            /* This setup adds a dark overlay so text is always readable. */
+            
+            /* background: linear-gradient(rgba(13, 17, 23, 0.95), rgba(13, 17, 23, 0.95)), url('path/to/your-dark-image.jpg'); */
+            
+            background-color: var(--bg-color-solid); /* Fallback color if no image is used */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        
+        /* Main page wrapper to center content */
+        .page-wrapper {
+            width: 100%;
+            max-width: 800px;
+            position: relative; /* Anchor for the back button */
+        }
+
+        /* Redesigned Back Button - Positioned within the centered content */
+        .back-button {
+            position: absolute;
+            top: -7cap;
+            left: 0;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--secondary-surface-color);
+            color: var(--primary-text-color);
+            text-decoration: none;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            z-index: 100;
+            transition: all 0.2s ease-in-out;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .back-button:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+            background-color: rgba(56, 62, 70, 0.7);
+        }
+
+        .back-button svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--primary-text-color);
+            stroke-width: 2.5;
+        }
+        
+        /* Header Title */
+        header {
+            text-align: center;
+            padding: 1rem 0; /* Vertical space */
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            font-weight: 600;
+            color: #f0f6fc;
+            text-shadow: var(--header-glow);
+            animation: fadeInDown 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* Accordion Styling */
+        .accordion-section {
+            margin-bottom: 1.25rem;
+            animation: slideUpFadeIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .accordion-section:nth-of-type(1) { animation-delay: 0.1s; }
+        .accordion-section:nth-of-type(2) { animation-delay: 0.2s; }
+        .accordion-section:nth-of-type(3) { animation-delay: 0.3s; }
+
+        .accordion-header {
+            background: var(--primary-surface-color);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            border-color: var(--accent-glow-color);
+            background-color: #1c2128;
+        }
+        
+        .accordion-header.active {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: #1c2128;
+        }
+        
+        h2 {
+            font-size: clamp(1.1rem, 3vw, 1.25rem);
+            font-weight: 500;
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .accordion-header.active .accordion-icon { transform: rotate(45deg); }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background-color: var(--bg-color-solid);
+            padding: 0 1.5rem;
+        }
+
+        .accordion-header.active + .accordion-content { padding: 1.5rem; }
+        
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.2rem;
+        }
+       
+        /* Contact Card */
+        .contact-card {
+            background: linear-gradient(145deg, #191e25, #13171d);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: scale(1.03);
+            border-color: var(--card-hover-border);
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+        
+        .phone-list { list-style: none; }
+        .phone-list li { margin-bottom: 0.2rem; }
+        .phone-list a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            -webkit-user-select: none; user-select: none;
+            -webkit-touch-callout: none;
+        }
+        .phone-list a:hover {
+            background-color: var(--accent-glow-color);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary-text-color);
+            border-top: 1px solid var(--border-color);
+            opacity: 0;
+            animation: slideUpFadeIn 1s 0.8s ease-out forwards;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed; /* Toasts should be fixed relative to viewport */
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-surface-color);
+            color: var(--primary-text-color);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            z-index: 1001;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--accent-color);
+            animation: toast-slide 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* Animations */
+        @keyframes toast-slide {
+            5%, 85% { transform: translate(-50%, -40px); opacity: 1; }
+            100% { transform: translate(-50%, 100px); opacity: 0; }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUpFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="page-wrapper">
+        <a href="../info/info.html" class="back-button" aria-label="Go Back">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" d="M15 19l-7-7 7-7" />
+            </svg>
+        </a>
+
+        <header>
+            <h1>📞 Barpeta Road Important Contact Numbers</h1>
+        </header>
+
+        <main>
+            <!-- Emergency Services Section -->
+            <section class="accordion-section">
+                <div class="accordion-header"><h2>🚨 Emergency Services</h2><span class="accordion-icon">+</span></div>
+                <div class="accordion-content">
+                    <div class="contacts-grid">
+                        <div class="contact-card"><h3>Fire Brigade</h3><ul class="phone-list"><li><a data-number="230188">230188</a></li></ul></div>
+                        <div class="contact-card"><h3>Marwari Youth Club</h3><ul class="phone-list"><li><a data-number="230373">230373</a></li></ul></div>
+                        <div class="contact-card"><h3>Town Management Committee</h3><ul class="phone-list"><li><a data-number="234308">234308</a></li><li><a data-number="9435031654">94350-31654</a></li></ul></div>
+                        <div class="contact-card"><h3>Municipal Businessmen’s Assoc.</h3><ul class="phone-list"><li><a data-number="230373">230373</a></li><li><a data-number="236388">236388</a></li></ul></div>
+                        <div class="contact-card"><h3>Byaspara Youth Association</h3><ul class="phone-list"><li><a data-number="234448">234448</a></li><li><a data-number="9435004618">94350-04618</a></li></ul></div>
+                        <div class="contact-card"><h3>Chunilal Club (Ambulance)</h3><ul class="phone-list"><li><a data-number="230248">230248</a></li></ul></div>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <!-- Medical Services Section -->
+            <section class="accordion-section">
+                <div class="accordion-header"><h2>⚕️ Medical Services</h2><span class="accordion-icon">+</span></div>
+                <div class="accordion-content">
+                    <div class="contacts-grid">
+                        <div class="contact-card"><h3>Barpeta Road Rural Hospital</h3><ul class="phone-list"><li><a data-number="237772">237772</a></li><li><a data-number="237676">237676</a></li></ul></div>
+                         <div class="contact-card"><h3>Aalingan Polyclinic cum hospital</h3><ul class="phone-list"><li><a data-number="9435025239">9435025239</a></li><li></ul></div>
+                        
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Other Services Section -->
+            <section class="accordion-section">
+                <div class="accordion-header"><h2>🛠️ Other Services</h2><span class="accordion-icon">+</span></div>
+                <div class="accordion-content">
+                    <div class="contacts-grid">
+                        <div class="contact-card"><h3>Railway Station</h3><ul class="phone-list"><li><a data-number="230708">230708</a></li><li></ul></div>
+                        <div class="contact-card"><h3>Police Station</h3><ul class="phone-list"><li><a data-number="230736">230736</a></li></ul></div>
+                        <div class="contact-card"><h3>Forest Department</h3><ul class="phone-list"><li><a data-number="230791">230791</a></li></ul></div>
+                        <div class="contact-card"><h3>Tourist Protection Force</h3><ul class="phone-list"><li><a data-number="9435052598">94350-52598</a></li></ul></div>
+                        <div class="contact-card"><h3>Barpeta Road Municipality</h3><ul class="phone-list"><li><a data-number="230703">230703</a></li><li><a data-number="9859584584">98595-84584</a></li></ul></div>
+                        <div class="contact-card"><h3>Electricity (Complaint)</h3><ul class="phone-list"><li><a data-number="230230">230230</a></li></ul></div>
+                        <div class="contact-card"><h3>Electricity (Billing)</h3><ul class="phone-list"><li><a data-number="230317">230317</a></li></ul></div>
+                        <div class="contact-card"><h3>Water Supply Dept.</h3><ul class="phone-list"><li><a data-number="231414">231414</a></li></ul></div>
+                        <div class="contact-card"><h3>Telephone Exchange</h3><ul class="phone-list"><li><a data-number="230703">230703</a></li><li><a data-number="230830">230830</a></li></ul></div>
+                        <div class="contact-card"><h3>Income Tax Dept. Office</h3><ul class="phone-list"><li><a data-number="230444">230444</a></li></ul></div>
+                        <div class="contact-card"><h3>Central Excise & Customs Dept.</h3><ul class="phone-list"><li><a data-number="230535">230535</a></li></ul></div>
+                        <div class="contact-card"><h3>SBI Gate Enquiry</h3><ul class="phone-list"><li><a data-number="230230">230230</a></li></ul></div>
+                        <div class="contact-card"><h3>BOB Gate Enquiry</h3><ul class="phone-list"><li><a data-number="230737">230737</a></li><li><a data-number="231819">231819</a></li></ul></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            © 2025 Barpeta Road Info – The Mirror of Athiabari
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Accordion Logic
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const currentlyActive = document.querySelector('.accordion-header.active');
+                    if (currentlyActive && currentlyActive !== header) {
+                        currentlyActive.classList.remove('active');
+                        currentlyActive.nextElementSibling.style.maxHeight = null;
+                        currentlyActive.nextElementSibling.style.padding = '0 1.5rem';
+                    }
+                    header.classList.toggle('active');
+                    const content = header.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        content.style.padding = '0 1.5rem';
+                    } else {
+                        setTimeout(() => { content.style.padding = '1.5rem'; }, 50);
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            // Long-press and click functionality
+            document.querySelectorAll('.phone-list a').forEach(link => {
+                const phoneNumber = link.getAttribute('data-number');
+                link.href = `tel:${phoneNumber}`;
+                let pressTimer;
+                let isLongPress = false;
+                const longPressDuration = 800;
+
+                const startPress = () => {
+                    isLongPress = false;
+                    pressTimer = window.setTimeout(() => {
+                        isLongPress = true;
+                        if (navigator.vibrate) navigator.vibrate(50);
+                        copyToClipboard(phoneNumber);
+                    }, longPressDuration);
+                };
+                
+                const cancelPress = () => clearTimeout(pressTimer);
+                
+                const clickAction = (e) => { if (isLongPress) e.preventDefault(); };
+                
+                link.addEventListener('mousedown', startPress);
+                link.addEventListener('mouseup', cancelPress);
+                link.addEventListener('mouseleave', cancelPress);
+                link.addEventListener('touchstart', startPress, { passive: true });
+                link.addEventListener('touchend', cancelPress);
+                link.addEventListener('touchcancel', cancelPress);
+                link.addEventListener('click', clickAction);
+            });
+
+            // Universal Copy and Toast function
+            function copyToClipboard(text) {
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(() => showToast('Copied 📞'));
+                } else { // Fallback
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    textArea.style.position = "absolute";
+                    textArea.style.left = "-9999px";
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        showToast('Copied 📞');
+                    } catch (err) {
+                        console.error('Fallback copy failed', err);
+                    }
+                    document.body.removeChild(textArea);
+                }
+            }
+
+            function showToast(message) {
+                const existingToast = document.querySelector('.toast');
+                if (existingToast) existingToast.remove();
+                
+                const toast = document.createElement('div');
+                toast.textContent = message;
+                toast.className = 'toast';
+                document.body.appendChild(toast);
+                
+                setTimeout(() => { toast.remove(); }, 3400);
+            }
+        });
+    </script>
+
+</body>
+</html>

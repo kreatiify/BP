@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barpeta Road: Data Core Terminal</title>
+    
+    <style>
+        /* --- Google Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Jura:wght@400;600&family=Oxanium:wght@700&display=swap');
+
+        /* --- CSS Variables --- */
+        :root {
+            --dark-bg: #01020a;
+            --glow-cyan: #00f6ff;
+            --light-text: #e0e0e0;
+            --container-bg: rgba(5, 7, 27, 0.7);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Jura', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            min-height: 100vh;
+            overflow-x: hidden; /* --- CHANGE: Was overflow: hidden. Now allows vertical scroll but prevents horizontal. --- */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 246, 255, 0.15), transparent 30%),
+                radial-gradient(circle at 80% 90%, rgba(106, 0, 255, 0.2), transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 72, 0, 0.1), transparent 35%);
+            background-size: 200% 200%;
+            animation: moveNebula 50s linear infinite;
+        }
+        @keyframes moveNebula {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* --- PRELOADER --- */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--dark-bg); display: flex;
+            justify-content: center; align-items: center; z-index: 9999;
+            transition: opacity 0.75s ease-out;
+        }
+        #preloader.fade-out { opacity: 0; pointer-events: none; }
+        .preloader-sequence { width: 200px; text-align: center; }
+        .preloader-sequence span {
+            font-family: 'Oxanium', cursive; letter-spacing: 2px; font-size: 1rem;
+            color: var(--glow-cyan); opacity: 0.7; display: block; margin-bottom: 15px;
+        }
+        .sequence-bar {
+            width: 100%; height: 3px; background-color: rgba(0, 246, 255, 0.1);
+            position: relative; overflow: hidden;
+        }
+        .sequence-bar::after {
+            content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 40%; 
+            background: var(--glow-cyan); box-shadow: 0 0 10px var(--glow-cyan);
+            animation: scanBar 2s ease-in-out infinite;
+        }
+        @keyframes scanBar { 0% { left: -40%; } 50% { left: 100%; } 100% { left: -40%; } }
+
+
+        /* --- NEW HOME BUTTON --- */
+        #home-button {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 1000;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(5, 7, 27, 0.5);
+            border: 1px solid rgba(0, 246, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInSimple 1s 1s forwards;
+        }
+        #home-button:hover, #home-button:focus {
+            background-color: rgba(0, 246, 255, 0.1);
+            border-color: var(--glow-cyan);
+            box-shadow: 0 0 10px rgba(0, 246, 255, 0.2);
+        }
+        #home-button svg {
+            width: 20px;
+            height: 20px;
+            color: var(--glow-cyan);
+            transition: color 0.3s ease;
+        }
+
+        /* --- Main Content Structure --- */
+        #main-content {
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start; /* --- CHANGE: Was center. This prevents content from being cut off at the top on tall screens. --- */
+            min-height: 100vh;
+            width: 100%; 
+            opacity: 0; 
+            transition: opacity 0.5s ease-in;
+            padding: 60px 15px; /* --- NEW: Adds vertical spacing for scrollable content and side padding. --- */
+        }
+        #main-content.loaded { opacity: 1; }
+
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; } /* UPDATED: Changed z-index to -1 so it doesn't block content */
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; /* CHANGED: position: fixed so it doesn't scroll with content */
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0, transparent 1px, transparent 4px);
+            pointer-events: none; z-index: -1; opacity: 0.5;  /* UPDATED: Changed z-index to -1 */
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .celestial-container {
+            width: 100%; /* --- CHANGE: Use 100% width within the padded main-content for better mobile control --- */
+            max-width: 900px; 
+            padding: 30px 40px; 
+            background: var(--container-bg);
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            text-align: center; 
+            z-index: 10; 
+            position: relative;
+            opacity: 0; 
+            transform: translateY(20px);
+            animation: fadeInSimple 1.5s 0.5s forwards cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(0, 246, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.05), 0 0 50px rgba(0, 0, 0, 0.7);
+        }
+        @keyframes fadeInSimple { to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Typography with REFINED GLOW --- */
+        .title-fancy {
+            font-family: 'Oxanium', cursive; font-size: 2.8rem; letter-spacing: 3px;
+            margin-bottom: 15px; color: var(--light-text);
+            text-shadow: 0 0 5px rgba(0, 246, 255, 0.7);
+        }
+        .intro-text { font-size: 1.1rem; color: #a0a0b0; line-height: 1.8; max-width: 650px; margin: 0 auto 30px auto; min-height: 5em; }
+        .divider { height: 1px; width: 40%; margin: 0 auto 35px; border: none; opacity: 0.4; background: linear-gradient(90deg, transparent, var(--glow-cyan), transparent); }
+
+        /* --- ANGULAR BUTTONS --- */
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .option-node {
+            background-color: transparent; border: 1px solid rgba(0, 246, 255, 0.2); color: var(--light-text);
+            padding: 16px 15px; text-decoration: none; font-size: 1rem; font-weight: 600; letter-spacing: 1px;
+            cursor: pointer; position: relative; transition: all 0.4s ease;
+            background-image: linear-gradient(115deg, transparent 40%, rgba(0, 246, 255, 0.2), transparent 60%);
+            background-size: 250% 100%; background-position: 100% 0;
+            -webkit-tap-highlight-color: transparent; /* Disables default grey tap highlight on iOS/Android for a cleaner custom feedback */
+        }
+        .option-node:hover, .option-node:focus {
+            color: white; border-color: rgba(0, 246, 255, 0.6); transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 246, 255, 0.1); background-position: 0 0;
+        }
+        .option-node:last-child:nth-child(odd) { grid-column: span 2; }
+        .option-node:active {
+            transform: translateY(-2px); /* Provides instant tactile feedback on tap */
+            box-shadow: 0 2px 8px rgba(0, 246, 255, 0.15); 
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            #main-content {
+                padding-top: 80px; /* Add more top space for home button */
+                padding-bottom: 30px;
+            }
+            .celestial-container { padding: 25px 20px; } 
+            .title-fancy { font-size: 2.2rem; }
+            .intro-text { font-size: 1rem; } 
+            .options-grid { grid-template-columns: 1fr; }
+            .option-node:last-child:nth-child(odd) { grid-column: auto; }
+
+            /* Adjust home button for smaller screens */
+            #home-button {
+                top: 15px;
+                left: 15px;
+                width: 35px;
+                height: 35px;
+            }
+            #home-button svg { width: 18px; height: 18px; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="preloader">
+        <div class="preloader-sequence">
+            <span>INITIALIZING...</span>
+            <div class="sequence-bar"></div>
+        </div>
+    </div>
+    
+    <a href="../index.html" id="home-button" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/>
+        </svg>
+    </a>
+    
+    <canvas id="particle-canvas"></canvas>
+    
+    <div id="main-content">
+        <main class="celestial-container">
+            <header>
+                <h1 class="title-fancy" id="main-title"></h1>
+                <p class="intro-text" id="intro-text"></p>
+                <hr class="divider">
+            </header>
+            <nav class="options-grid">
+                <a href="Edu.html" class="option-node">Education</a>
+                <a href="#" class="option-node">Health</a>
+                <a href="#" class="option-node">Hotel & Resturent</a>
+                <a href="#" class="option-node">2 & 4 Wheeler Showroom / Service</a>
+                <a href="#" class="option-node">Club & Assciation</a>
+                <a href="#" class="option-node">Religious Places</a>
+                <a href="#" class="option-node">Offices</a>
+                <a href="imp_no.html" class="option-node">Important Contact</a>
+                <a href="#" class="option-node">None</a>
+            </nav>
+        </main>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- PARTICLE CANVAS SCRIPT ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particlesArray = [];
+        const numberOfParticles = window.innerWidth > 768 ? 100 : 35;
+        const connectDistance = window.innerWidth > 768 ? 120 : 80;
+        const mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (event) => { mouse.x = event.x; mouse.y = event.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+        class Particle {
+            constructor(x, y, size, color, weight) { this.x = x; this.y = y; this.size = size; this.color = color; this.weight = weight; this.baseX = this.x; this.baseY = this.y; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
+            update() { this.x += this.weight; if (this.x > canvas.width) { this.x = 0 - this.size; this.y = Math.random() * canvas.height; } let dx = mouse.x - this.x; let dy = mouse.y - this.y; if (Math.sqrt(dx*dx + dy*dy) < 100) { this.x -= dx/20; this.y -= dy/20; } else { if (this.x !== this.baseX) { this.x -= (this.x - this.baseX)/10; } if (this.y !== this.baseY) { this.y -= (this.y - this.baseY)/10; } } }
+        }
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                let x = Math.random() * canvas.width; let y = Math.random() * canvas.height;
+                let size = Math.random() * 2 + 1; let color = `rgba(224, 224, 224, ${Math.random() * 0.5 + 0.3})`;
+                let weight = (Math.random() * 0.3) - 0.15;
+                particlesArray.push(new Particle(x, y, size, color, weight));
+            }
+        }
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) { for (let b = a; b < particlesArray.length; b++) { let dx = particlesArray[a].x - particlesArray[b].x; let dy = particlesArray[a].y - particlesArray[b].y; let distance = Math.sqrt(dx * dx + dy * dy); if (distance < connectDistance) { const opacity = 1 - (distance / connectDistance); ctx.strokeStyle = `rgba(0, 246, 255, ${opacity * 0.2})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke(); } } }
+            if (mouse.x !== null) { for (let i = 0; i < particlesArray.length; i++) { let dx = particlesArray[i].x - mouse.x; let dy = particlesArray[i].y - mouse.y; let distance = Math.sqrt(dx * dx + dy * dy); if (distance < 180) { const opacity = 1 - (distance / 180); ctx.strokeStyle = `rgba(0, 246, 255, ${opacity * 0.8})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(particlesArray[i].x, particlesArray[i].y); ctx.stroke(); } } }
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let particle of particlesArray) { particle.update(); particle.draw(); }
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+        initParticles(); animate();
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
+
+        // --- TYPING TEXT SCRIPT ---
+        const typeEffect = (element, text, delay, callback) => {
+            let i = 0; element.innerHTML = ""; const cursor = document.createElement('span'); cursor.className = 'typing-cursor'; element.appendChild(cursor);
+            const timer = setInterval(() => {
+                if (i < text.length) { cursor.insertAdjacentText('beforebegin', text.charAt(i)); i++; } 
+                else { clearInterval(timer); element.removeChild(cursor); if (callback) callback(); }
+            }, delay);
+        };
+        
+        // --- PRELOADER AND CONTENT FADE LOGIC ---
+        const preloader = document.getElementById('preloader');
+        const mainContent = document.getElementById('main-content');
+        window.addEventListener('load', () => {
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+                mainContent.classList.add('loaded');
+                const titleText = "Barpeta Road";
+                const introContent = "Accessing Celestial Data Hub... Welcome. This terminal provides navigational nodes to key sectors. Select a node to access detailed information.";
+                const titleEl = document.getElementById('main-title');
+                const introEl = document.getElementById('intro-text');
+                
+                typeEffect(titleEl, titleText, 25, () => {
+                     setTimeout(() => { typeEffect(introEl, introContent, 15); }, 300);
+                });
+            }, 500);
+        });
+    });
+    </script>
+</body>
+</html>
